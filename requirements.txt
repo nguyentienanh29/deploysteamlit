@@ -1,4 +1,6 @@
+streamlit
 pandas
 matplotlib
-streamlit
-datetime
+openpyxl
+openai
+python-dotenv
