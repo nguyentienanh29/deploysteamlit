@@ -1,0 +1,178 @@
+DỰ ÁN CAPSTONE - TỔNG QUAN VÀ KỊCH BẢN DEMO
+
+1. TỔNG QUAN DỰ ÁN
+
+Tên dự án:
+Web quản lý kho bằng Python Streamlit
+
+Mục tiêu dự án:
+Dự án này dùng để quản lý thông tin hàng hóa trong kho theo giao diện web đơn giản, dễ thao tác và dễ demo.
+Người dùng có thể theo dõi số lượng tồn kho, thêm hàng mới, chỉnh sửa thông tin sản phẩm, xóa sản phẩm và xem thống kê trực quan.
+
+Công nghệ sử dụng:
+- Python
+- Streamlit
+- Pandas
+- Matplotlib
+- OpenPyXL
+- OpenAI API service chuẩn bị sẵn trong chatboxService.py
+
+Dữ liệu dự án:
+- Dữ liệu kho được lưu trong file Excel: export/warehouse_info.xlsx
+- Khi cần, hệ thống có thể nạp dữ liệu mẫu gồm 5 sản phẩm:
+  Laptop, Chuot, Ban Phim, Man hinh, USB
+
+Cấu trúc chức năng chính:
+- Trang chủ:
+  Hiển thị tổng quan số mặt hàng, tổng số lượng tồn, số sản phẩm sắp hết, số sản phẩm hết hàng, tổng giá trị tồn kho.
+
+- Danh sách:
+  Xem danh sách hàng hóa theo bộ lọc trạng thái và tên sản phẩm.
+
+- Thêm hàng:
+  Nhập sản phẩm mới gồm thương hiệu, tên sản phẩm, số lượng và đơn giá.
+  Hệ thống tự tính trạng thái tồn kho và tổng tiền.
+
+- Sửa và Xóa:
+  Chọn sản phẩm theo mã.
+  Có thể cập nhật thương hiệu, số lượng, đơn giá.
+  Có hộp thoại xác nhận trước khi xóa.
+
+- Thống kê:
+  Biểu đồ top 5 sản phẩm có giá trị tồn kho cao.
+  Biểu đồ tỷ lệ tồn kho theo trạng thái.
+
+Luồng xử lý dữ liệu:
+- main.py là giao diện chính.
+- service/warehouseService.py xử lý đọc, ghi, chuyển đổi dữ liệu Excel.
+- models/warehouse.py định nghĩa đối tượng sản phẩm và quy tắc trạng thái tồn kho:
+  so_luong > 5: Còn hàng
+  1 <= so_luong <= 5: Sắp hết
+  so_luong <= 0: Hết hàng
+
+Điểm nổi bật:
+- Giao diện đơn giản, phù hợp demo.
+- Dữ liệu lưu bằng Excel nên dễ xem và dễ kiểm tra.
+- Có đủ CRUD cơ bản và thống kê trực quan.
+- Đã chuẩn bị service chatbox riêng để mở rộng sang trợ lý hỏi đáp kho trong các bước tiếp theo.
+
+
+2. KỊCH BẢN DEMO VÀ QUAY VIDEO
+
+Mục tiêu video:
+Giới thiệu ngắn gọn bài toán, thao tác nhanh các chức năng chính và cho thấy hệ thống quản lý kho hoạt động rõ ràng.
+
+Thời lượng đề xuất:
+2 đến 4 phút
+
+Chuẩn bị trước khi quay:
+- Mở terminal tại thư mục capstone
+- Chạy lệnh: streamlit run main.py
+- Phóng to trình duyệt khoảng 110% đến 125% để dễ nhìn
+- Đảm bảo file dữ liệu đang có sẵn dữ liệu mẫu để các biểu đồ hiển thị đẹp
+
+Kịch bản quay ngắn gọn:
+
+Bước 1. Mở đầu
+Lời nói gợi ý:
+"Đây là dự án web quản lý kho được xây dựng bằng Python và Streamlit. Ứng dụng hỗ trợ theo dõi hàng hóa, cập nhật tồn kho và xem thống kê trực quan."
+
+Thao tác:
+- Mở ứng dụng tại trang chủ
+- Dừng khoảng 3 đến 5 giây để thấy các metric tổng quan
+
+Bước 2. Giới thiệu trang chủ
+Lời nói gợi ý:
+"Ở trang chủ, hệ thống hiển thị nhanh tổng số mặt hàng, tổng tồn kho, số sản phẩm sắp hết, số sản phẩm hết hàng và tổng giá trị tồn kho."
+
+Thao tác:
+- Di chuột lần lượt qua các metric
+
+Bước 3. Vào mục Danh sách
+Lời nói gợi ý:
+"Tại mục danh sách, người dùng có thể lọc hàng hóa theo trạng thái và theo tên sản phẩm để tìm kiếm nhanh hơn."
+
+Thao tác:
+- Chọn menu Danh sách
+- Chọn trạng thái Sắp hết
+- Chọn một sản phẩm cụ thể nếu có
+- Cho người xem thấy bảng dữ liệu thay đổi theo bộ lọc
+
+Bước 4. Thêm hàng mới
+Lời nói gợi ý:
+"Tiếp theo là chức năng thêm hàng mới. Người dùng nhập thương hiệu, tên sản phẩm, số lượng và đơn giá, hệ thống sẽ tự tính trạng thái và tổng giá trị."
+
+Thao tác:
+- Chọn menu Thêm hàng
+- Nhập một sản phẩm mới, ví dụ:
+  Thương hiệu: ASUS
+  Tên sản phẩm: Webcam
+  Số lượng: 4
+  Đơn giá: 900000
+- Nhấn Thêm hàng
+- Chờ thông báo thêm thành công
+
+Lưu ý khi nói:
+- Vì số lượng là 4 nên trạng thái sẽ thuộc nhóm Sắp hết
+
+Bước 5. Kiểm tra lại trong Danh sách
+Lời nói gợi ý:
+"Sau khi thêm mới, dữ liệu được lưu lại và có thể kiểm tra ngay trong danh sách."
+
+Thao tác:
+- Quay lại menu Danh sách
+- Lọc theo tên sản phẩm Webcam hoặc trạng thái Sắp hết
+- Cho người xem thấy dòng vừa thêm
+
+Bước 6. Sửa sản phẩm
+Lời nói gợi ý:
+"Ngoài thêm mới, hệ thống còn hỗ trợ cập nhật thông tin sản phẩm theo mã hàng."
+
+Thao tác:
+- Vào menu Sửa & Xoá
+- Chọn sản phẩm Webcam vừa thêm
+- Đổi số lượng từ 4 thành 12
+- Có thể đổi đơn giá nếu muốn
+- Nhấn sửa hàng
+
+Lưu ý khi nói:
+- Khi số lượng tăng lên trên 5 thì trạng thái tồn kho sẽ chuyển thành Còn hàng
+
+Bước 7. Xem thống kê
+Lời nói gợi ý:
+"Phần thống kê giúp người dùng nhìn nhanh tình hình kho qua biểu đồ."
+
+Thao tác:
+- Chọn menu Thống kê
+- Dừng ở biểu đồ top 5 sản phẩm
+- Kéo xuống hoặc rê chuột để thấy biểu đồ tỷ lệ tồn kho
+
+Bước 8. Xóa sản phẩm
+Lời nói gợi ý:
+"Khi không cần nữa, người dùng có thể xóa sản phẩm và hệ thống có bước xác nhận để tránh thao tác nhầm."
+
+Thao tác:
+- Quay lại menu Sửa & Xoá
+- Chọn sản phẩm Webcam ở phần xóa
+- Nhấn xóa hàng
+- Trong popup, nhấn Xác nhận xóa
+- Chờ thông báo thành công
+
+Bước 9. Kết thúc video
+Lời nói gợi ý:
+"Tóm lại, dự án hỗ trợ quản lý kho với các chức năng cơ bản gồm theo dõi tồn kho, thêm, sửa, xóa và thống kê. Trong bước phát triển tiếp theo, hệ thống có thể mở rộng thêm trợ lý AI để hỏi đáp dữ liệu kho."
+
+
+3. MẸO QUAY VIDEO CHO MƯỢT
+
+- Chỉ demo 1 sản phẩm mới từ đầu đến cuối để người xem dễ theo dõi.
+- Nói ngắn, mỗi chức năng chỉ 1 đến 2 câu.
+- Khi nhấn nút xong, dừng 1 giây để người xem thấy thông báo.
+- Nếu muốn video gọn hơn, có thể bỏ bước lọc theo tên và chỉ giữ các phần:
+  Trang chủ -> Thêm hàng -> Sửa hàng -> Thống kê -> Xóa hàng
+
+
+4. LỆNH CHẠY DỰ ÁN
+
+Từ thư mục capstone:
+streamlit run main.py
